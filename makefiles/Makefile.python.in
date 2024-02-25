@@ -42,7 +42,8 @@ show-venv:: | check-venv
 install-poetry::
 	@echo "++ $@"
 	# will install poetry in this venv
-	pip install --upgrade "urllib3<2" poetry --ignore-installed virtualenv
+	#pip install --upgrade "urllib3<2" poetry --ignore-installed virtualenv
+	pip install --upgrade poetry --ignore-installed virtualenv
 	poetry self update --no-ansi
 
 set-pyproject-vers:: check-venv install-poetry
