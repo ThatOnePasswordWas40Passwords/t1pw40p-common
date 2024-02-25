@@ -49,6 +49,5 @@ send_commit_status(){ local status="${1}" desc="${2}" context="${3}"
         -H "${GH_HEADER}" \
         -H "Authorization: Bearer ${GH_TOK}" \
         "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
-        -d '{"state":"'"${status}"'","target_url": "'"${action_url}"'", "description":"'"${desc}"'","context":"'"${BASE_CONTEXT}/${context}"'"}' &>/d
-ev/null
+        -d '{"state":"'"${status}"'","target_url": "'"${action_url}"'", "description":"'"${desc}"'","context":"'"${BASE_CONTEXT}/${context}"'"}' &>/dev/null
 }
