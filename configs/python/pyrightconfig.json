@@ -1,0 +1,7 @@
+{
+    "reportMissingImports": true,
+    "reportMissingTypeStubs": true,
+    "pythonVersion": "3.12",
+    "typeCheckingMode": "strict",
+    "useLibraryCodeForTypes": true
+}
