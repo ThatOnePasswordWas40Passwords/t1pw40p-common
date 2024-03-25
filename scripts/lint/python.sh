@@ -16,7 +16,8 @@ lint(){ local src_dir="${1-src}" test_dir="${2-test}"
 
     # Requires standard project layout; all must have symlinked common ruff
     # config to root repo's ruff.toml
-    ruff check "${src_dir}/../ruff.toml" "${src_dir}" "${test_dir}" || rc=$?
+    ruff check --config "${src_dir}/../ruff.toml" "${src_dir}" "${test_dir}" || rc=$?
+    ruff format --config "${src_dir}/../ruff.toml" --check "${src_dir}" "${test_dir}" || rc=$?
 
     if [[ "${CI-}" != "true" ]]; then
         exit $rc
