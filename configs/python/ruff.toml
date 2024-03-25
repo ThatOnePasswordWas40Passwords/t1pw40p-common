@@ -1,17 +1,25 @@
-[ruff]
 # Same as Black.
-line-length = 88
+line-length = 100
 indent-width = 4
-target-version = "py312"
 
-[ruff.lint]
+[lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
 # McCabe complexity (`C901`) by default
 select = ["D", "E", "F", "W", "I", "N", "UP", "ANN", "Q", "RUF"]
 
-# self type annotation, X | Y union syntax, tuple vs Tuple, tpye strings in f-strings
-ignore = ["ANN101", "UP007", "UP006", "RUF010"]
+ignore = [
+  "ANN101", # Missing type annotation for {name} in method
+  "ANN202", # Missing return type annotation for private function {name}
+  "ANN204", # Missing return type annotation for special method
+  "ANN206", # Missing return type annotation for classmethod {name}
+  "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in {name}
+  "D105",   # Missing docstring in magic method
+  "D412",   # No blank lines allowed between a section header and its content ("{name}")
+  "RUF010",
+  "UP006",
+  "UP007"
+]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
@@ -20,7 +28,10 @@ unfixable = []
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
-[ruff.format]
+[lint.per-file-ignores]
+"test/*" = ["D", "ANN"]
+
+[format]
 # Like Black, use double quotes for strings.
 quote-style = "double"
 
@@ -47,5 +58,5 @@ docstring-code-format = true
 # enabled.
 docstring-code-line-length = "dynamic"
 
-[ruff.lint.pydocstyle]
+[lint.pydocstyle]
 convention = "google"
