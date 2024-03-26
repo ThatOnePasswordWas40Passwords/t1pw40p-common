@@ -73,11 +73,20 @@ test-integration:: check-venv install-deps
 
 package:: check-venv set-pyproject-vers install-deps test-all
 	@echo "++ $@"
-	poetry build --no-ansi && sed -i 's/^version=.*/version="0.0.0"/g' pyproject.toml
+	poetry build --no-ansi
+
+config-test-pypi: check-venv
+	poetry config repositories.test-pypi https://test.pypi.org/legacy/
 
 publish:: check-venv package
 	@echo "++ $@"
 	poetry publish -vv
+	@sed -i 's/^version=.*/version="0.0.0"/g' pyproject.toml
+
+publish-dev:: check-venv package config-test-pypi
+	@echo "++ $@"
+	poetry publish -vv -r test-pypi
+	@sed -i 's/^version=.*/version="0.0.0"/g' pyproject.toml
 
 extra-docker-args:
 	@echo $(EXTRA_DOCKER_ARGS)
